@@ -5,7 +5,6 @@ if (User::loggedIn()) {
 	Config::redir("index.php");
 }
 ?>
-
 <html>
 
 <head>
@@ -26,7 +25,6 @@ if (User::loggedIn()) {
 				<?php
 				if (isset($_GET['attempt'])) {
 					// STARTING THE LOGIN AREA 
-
 					$status = $_GET['attempt'];
 
 					switch ($status) {

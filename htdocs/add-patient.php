@@ -10,8 +10,6 @@ if(!User::loggedIn()){
 <head>
 	<title>Add Patients - <?php echo CONFIG::SYSTEM_NAME; ?></title>
 	<?php require_once "inc/head.inc.php";  ?> 
-	
-	 
 </head>
 <body>
 	<?php require_once "inc/header.inc.php"; ?> 
@@ -28,8 +26,6 @@ if(!User::loggedIn()){
 					<div class='form-holder' style='margin-top: 50px;'>
 					    <div class='badge-header'>Patient Details</div> 
 						
-						
-					
 						<?php
 						
 						if(isset($_GET['p-number'])){
@@ -37,13 +33,12 @@ if(!User::loggedIn()){
 							echo "<h3>Patient Number: $patientNumber</h3>";
 							
 							$name = $_GET['name'];
-							$location = $_GET['location'];
+							$street_address = $_GET['street_adress'];
+							$municipality = $_GET['municipality'];
 							$dateOfBirth = $_GET['dateOfBirth'];
 							
 							$dataBirth = explode("-", $dateOfBirth);
-							
 							$dateOfBirth = preg_replace("#[^0-9-]#", "", $dataBirth[2]."-".$dataBirth[1]."-".$dataBirth[0]);
-							
 							$age = $_GET['age'];
 							$gender = $_GET['gender'];
 							$phone = $_GET['phone'];
@@ -62,7 +57,8 @@ if(!User::loggedIn()){
 							$patientNumber = substr(preg_replace("#[^0-9]#", "", md5(uniqid().time())), 0, 4);
 							echo "<h3 style='color: #EF3235;'>Patient Number: <strong>$patientNumber</strong></h3>";
 							$name = "";
-							$location = "";
+							$street_address = "";
+							$municipality = "";
 							$dateOfBirth = "";
 							$age = "";
 							$gender = "";
@@ -78,14 +74,12 @@ if(!User::loggedIn()){
 							$diagnosis = "";
 							$prescription = "";
 							$condition = "";
-						}
-						
-						
-						
+						}				
 						
 						if(isset($_POST['p-name'])){
 							$name = $_POST['p-name'];
-							$location = $_POST['p-location']; 
+							$street_address = $_POST['p-street'];
+							$municipality = $_POST['p-municipality'];
 							$dateOfBirth = $_POST['p-birth'];
 							$age = $_POST['p-age']; 
 							$phone = $_POST['p-phone'];
@@ -102,13 +96,14 @@ if(!User::loggedIn()){
 							$gender = $_POST['gender']; 
 							$condition = $_POST['condition'];
 							
-							Patient::add($name, $location, $dateOfBirth, $age, $gender, $phone, $traveled, $entered, $origin, $destination, $dname, $vtype, $plate, $antigen,  $diagnosis, $prescription, User::getToken(), $patientNumber, $condition); 
+							Patient::add($name, $street_address, $municipality, $dateOfBirth, $age, $gender, $phone, $traveled, $entered, $origin, $destination, $dname, $vtype, $plate, $antigen,  $diagnosis, $prescription, User::getToken(), $patientNumber, $condition); 
 						}
 						
 						$form = new Form(3, "post");
 						$form->init(); 
 						$form->textBox("Full Name", "p-name", "text",  "$name", ""); 
-						$form->textBox("Address", "p-location", "text",  "$location", "");
+						$form->textBox("Street Address", "p-street", "text", "$street_address", "");
+						$form->textBox("Municipality", "p-municipality", "text", "$municipality", "");
 						$form->textBox("Date of Birth", "p-birth", "date", "$dateOfBirth", "");
 						$form->textBox("Age", "p-age", "text",  "$age", ""); 
 						$form->textBox("Phone", "p-phone", "text",  "$phone", "");	

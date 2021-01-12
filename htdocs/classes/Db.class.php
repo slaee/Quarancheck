@@ -1,6 +1,4 @@
 <?php 
-
-
 class Db{
 
 	public static function returnedSQlError($e){
@@ -13,7 +11,6 @@ class Db{
 	}
 
 	public static function connect(){
-
 		try{
 			$db = new PDO("mysql:host=".Config::DB_HOST.";dbname=".Config::DB_NAME,Config::DB_USER, Config::DB_PASSWORD);
 			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -22,7 +19,6 @@ class Db{
 		}
 
 		return $db;// always connect to the database when necessary and kill the  connection when done please;
-	
 	}
 
 	public static function insert($table, array $columns, array $colValues ){
@@ -47,8 +43,7 @@ class Db{
 			    }
 			$test.= ") ";
 
-             $query = $con->prepare($test);
-
+            $query = $con->prepare($test);
             $paramsCount = count($colValues); 
 
             $start = 0; 
