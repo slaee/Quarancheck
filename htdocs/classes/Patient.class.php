@@ -1,10 +1,10 @@
 <?php 
 
 class Patient{
-	public static function add($name, $location, $dateOfBirth, $age, $gender, $phone, $traveled, $entered, $origin, $destination, $dname, $vtype, $plate, $antigen,  $diagnosis, $prescriptions, $doctor, $number, $condition){
+	public static function add($name, $street_address, $municipality, $dateOfBirth, $age, $gender, $phone, $traveled, $entered, $origin, $destination, $dname, $vtype, $plate, $antigen,  $diagnosis, $prescriptions, $doctor, $number, $condition){
 		
 		
-		if($name == "" || $location == "" || $dateOfBirth == "" || $age == "" || $gender == "" || $phone == ""  || $traveled == ""  || $entered == ""  || $origin == ""  || $destination == ""  || $dname == ""  || $vtype == ""  || $plate == ""  || $antigen == ""  || $diagnosis == "" || $prescriptions == "" || $condition == ""){
+		if($name == "" || $street_address == ""|| $municipality == "" || $dateOfBirth == "" || $age == "" || $gender == "" || $phone == ""  || $traveled == ""  || $entered == ""  || $origin == ""  || $destination == ""  || $dname == ""  || $vtype == ""  || $plate == ""  || $antigen == ""  || $diagnosis == "" || $prescriptions == "" || $condition == ""){
 			Messages::error("All fields are required"); 
 			return; 
 		}
@@ -36,8 +36,8 @@ class Patient{
 		$prescriptions = str_replace("\n", "<br />", $prescriptions);
 		
 		Db::insert("patients", 
-				array("name", "location", "dateOfBirth", "age", "gender", "phone", "traveled", "entered", "origin", "destination", "dname", "vtype", "plate", "antigen", "cTime", "diagnosis", "prescription", "token", "doctor", "number", "pcondition"), 
-				array($name, $location, $correctDateOfBirth, $correctAge, $gender, $phone,  $traveled, $entered, $origin, $destination, $dname, $vtype, $plate, $antigen,  $time, $diagnosis, $prescriptions, $patientToken, $doctor, $number, $condition )
+				array("name", "street", "municipality", "dateOfBirth", "age", "gender", "phone", "traveled", "entered", "origin", "destination", "dname", "vtype", "plate", "antigen", "cTime", "diagnosis", "prescription", "token", "doctor", "number", "pcondition"), 
+				array($name, $street_address,$municipality, $correctDateOfBirth, $correctAge, $gender, $phone,  $traveled, $entered, $origin, $destination, $dname, $vtype, $plate, $antigen,  $time, $diagnosis, $prescriptions, $patientToken, $doctor, $number, $condition )
 		); 
 		
 		Config::redir("print.php?patient=$patientToken"); 
@@ -66,7 +66,8 @@ class Patient{
 	
 	public static function printP($token){
 		$name = self::get($token, "name");
-		$location = self::get($token, "location"); 
+		$street_address = self::get($token, "street");
+		$municipality = self::get($token, "municipality");
 		$dateOfBirth = self::get($token, "dateOfBirth"); 
 		$age = self::get($token, "age"); 
 		$phone = self::get($token, "phone"); 
@@ -99,7 +100,11 @@ class Patient{
 							<div><strong>Name:</strong> <span>$name</span></div>
 							<div><strong>Age:</strong> <span>$age</span></div>
 							<div><strong>Contact:</strong> <span>$phone</span></div>
-							<div><strong>Location:</strong> <span>$location</span></div>
+							<div><strong>Street Address:</strong> <span>$street_address</span></div>
+						</div>
+						
+					</div>
+					<div><strong>Street Municipality:</strong> <span>$municipality</span></div>
 						</div>
 					</div><br /> 
 					
@@ -179,7 +184,8 @@ class Patient{
 			while($data = Db::assoc($query)){
 				$token = $data['token'];
 				$name = self::get($token, "name");
-				$location = self::get($token, "location"); 
+				$street_address = self::get($token, "street"); 
+				$municipality = self::get($token,"municipality");
 				$dateOfBirth = self::get($token, "dateOfBirth"); 
 				$age = self::get($token, "age"); 
 				$phone = self::get($token, "phone"); 
@@ -202,7 +208,8 @@ class Patient{
 				echo "
 					<tr>
 						<td>$name</td>
-						<td>$location</td>
+						<td>$street_address</td>
+						<td>$municipality</td>
 						<td>$age</td>
 						<td>$entered</td>
 						<td>$traveled</td>
@@ -238,13 +245,14 @@ class Patient{
 		$data = Db::assoc($query);
 		
 		$name = $data['name']; 
-		$location = $data['location'];
+		$street_address = $data['street'];
+		$municipality = $data['municipality'];
 		$dateOfBirth = $data['dateOfBirth'];
 		$age = $data['age']; 
 		$phone = $data['phone'];
 		$gender = $data['gender']; 
 		
-		Config::redir("add-patient.php?p-number=$number&name=$name&location=$location&dateOfBirth=$dateOfBirth&age=$age&phone=$phone&gender=$gender");
+		Config::redir("add-patient.php?p-number=$number&name=$name&street_address=$street_address&municipality=$street_address&dateOfBirth=$dateOfBirth&age=$age&phone=$phone&gender=$gender");
 		
 	}
 	
@@ -278,14 +286,15 @@ class Patient{
 		
 		Table::start();
 		
-		$heading = array("Name", "Address", "Date of Birth", "Age", "Phone",  "Served On:", "Diagnosis", "Prescriptions", "Served By", "Print");
+		$heading = array("Name","Street Address","Municipality", "Address", "Date of Birth", "Age", "Phone",  "Served On:", "Diagnosis", "Prescriptions", "Served By", "Print");
 		$body = array();
 		Table::header($heading); 
 		
 	    while($data = Db::assoc($query)){
 			$token = $data['token']; 
 			$name = self::get($token, "name");
-			$location = self::get($token, "location"); 
+			$street_address = self::get($token, "street");
+			$municipality = self::get($token, "municipality");
 			$dateOfBirth = self::get($token, "dateOfBirth"); 
 			$age = self::get($token, "age"); 
 			$phone = self::get($token, "phone"); 
@@ -298,7 +307,7 @@ class Patient{
 			$doctorFirstName = User::get($doctor, "firstName"); 
 			$doctorSecondName = User::get($doctor, "secondName");
 			$servedBy = "$doctorFirstName $doctorSecondName";
-			Table::body(array($name, $location, $dateOfBirth, $age, $phone, $date, $diagnosis, $prescription, $servedBy, "<a href='print.php?patient=$token'>Print</a>"));
+			Table::body(array($name, $street_address,$municipality, $dateOfBirth, $age, $phone, $date, $diagnosis, $prescription, $servedBy, "<a href='print.php?patient=$token'>Print</a>"));
 			//array_push($body, ); 
 			
 		}
