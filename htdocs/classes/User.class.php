@@ -9,7 +9,7 @@ class User{
 	}
 
 	public static function login($email, $password, $status){
-		$query = Db::fetch("users", "token", "email = ? AND password = ? AND status = ?  ", array($email, $password, $status), "", "", "" ); 
+		$query = Db::fetch("users", "token", "email = ? AND password = ? AND type = ?  ", array($email, $password, $status), "", "", "" ); 
 		if(Db::count($query)){
 			Messages::success("Login Succeeded");
 			$tokenArray = Db::num($query); 
@@ -25,7 +25,7 @@ class User{
 			return; 
 		}
 		
-		if($status == 1){
+		if($status == "doctor"){
 			$user = "a Doctor";
 		} else {
 			$user = "an Admin"; 
@@ -55,14 +55,14 @@ class User{
 		$userEmail = User::get($token, "email");
 		$userPassword = User::get($token, "password");
 		$userToken = User::get($token, "token");
-		$userStatus = User::get($token, "status");
+		$userStatus = User::get($token, "type");
 		$userPhone = User::get($token, "phone");
 		$userProfile = User::get($token, "profile");
 		$userGender = User::get($token, "gender");
 		$userRole = User::get($token, "role");
 		$userLicense = User::get($token, "license");
 		
-		if($userStatus == 1){
+		if($userStatus == "admin"){
 			$userRole = "Admin";
 		} else {
 			$userRole = $userRole;

@@ -19,7 +19,7 @@ class Doctor{
 	}
 	
 	public static function load(){
-		$query = Db::fetch("users", "", "type = ? ", "doctor", "", "", "");
+		$query = Db::fetch("users", "", "type = ? ", "doctor", "id ", "", "");
 		if(Db::count($query)){
 			echo"<div class='form-holder'>
 					<table class='table table-bordered table-stripped'> 

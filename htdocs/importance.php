@@ -7,10 +7,10 @@
 ob_start();
 @session_start();
 
-// classes
-function __autoload($file){
+//use spl_autoload_register to avoid warnings
+spl_autoload_register(function($file){
 	require_once "classes/$file.class.php"; 
-}
+});
 
 // functions
 
@@ -23,7 +23,7 @@ if(User::loggedIn()){
 	$userEmail = User::get($token, "email");
 	$userPassword = User::get($token, "password");
 	$userToken = User::get($token, "token");
-	$userStatus = User::get($token, "status");
+	$userStatus = User::get($token, "type");
 	$userPhone = User::get($token, "phone");
 	$userProfile = User::get($token, "profile");
 	$userGender = User::get($token, "gender");
