@@ -2,10 +2,10 @@
 -- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 11, 2021 at 09:52 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.1
+-- Host: localhost
+-- Generation Time: Jan 12, 2021 at 04:18 PM
+-- Server version: 5.6.38
+-- PHP Version: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -43,7 +43,9 @@ CREATE TABLE `appointment` (
 --
 
 INSERT INTO `appointment` (`id`, `name`, `fromm`, `phone`, `message`, `too`, `cTime`) VALUES
-(4, 'charlene april alves', '1517', '9063430174', 'huyyy', 'kghjsdghasdghjfdfahj', '1606479210');
+(4, 'charlene april alves', '1517', '9063430174', 'huyyy', 'kghjsdghasdghjfdfahj', '1606479210'),
+(5, 'charlene april alves', '1517', '9063430174', 'Hi', '8d1b177eb8c2b3757d5d1fe8ca0f3d37', '1610450882'),
+(6, 'charlene april alves', '1517', '9063430174', 'you okay?', '8d1b177eb8c2b3757d5d1fe8ca0f3d37', '1610451008');
 
 -- --------------------------------------------------------
 
@@ -96,11 +98,12 @@ CREATE TABLE `outbreaks` (
 CREATE TABLE `patients` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `location` varchar(255) NOT NULL,
+  `street` varchar(255) NOT NULL,
+  `municipality` varchar(255) NOT NULL,
   `dateOfBirth` varchar(255) NOT NULL,
   `age` varchar(255) NOT NULL,
   `gender` varchar(255) NOT NULL,
-  `phone` varchar(255) NOT NULL,
+  `phone` varchar(11) NOT NULL,
   `traveled` varchar(255) NOT NULL,
   `entered` varchar(255) NOT NULL,
   `origin` varchar(255) NOT NULL,
@@ -122,14 +125,12 @@ CREATE TABLE `patients` (
 -- Dumping data for table `patients`
 --
 
-INSERT INTO `patients` (`id`, `name`, `location`, `dateOfBirth`, `age`, `gender`, `phone`, `traveled`, `entered`, `origin`, `destination`, `dname`, `vtype`, `plate`, `antigen`, `cTime`, `diagnosis`, `prescription`, `token`, `doctor`, `number`, `pcondition`) VALUES
-(5, 'charlene april alves', 'quezon santa ilocos sur', '', '23', 'Female', '9063430174', '', '', '', '', '', '', '', '', '1606477399', 'negative', 'negative', '0639125096a1773b4b755df7848cc56f', 'kghjsdghasdghjfdfahj', '1517', 'Inpatient'),
-(6, 'charlene april alves', 'quezon santa ilocos sur', '', '23', 'Female', '9063430174', '', '', '', '', '', '', '', '', '1606480292', 'positive', 'hahahha', '47538821e9dbf3b3a66fc4e5d5118d36', 'kghjsdghasdghjfdfahj', '1517', 'Outpatient'),
-(7, 'julius ceasar cuaresma', 'vigan', '', '21', 'Male', '09361226566', '', '', '', '', '', '', '', '', '1606795126', 'negative', 'travel history', 'd7fcc162c9e41624ae66225431027e50', 'kghjsdghasdghjfdfahj', '1577', 'Inpatient'),
-(8, 'charlene april alves', 'quezon santa ilocos sur', '', '23', 'Female', '09063430174', '', '', '', '', '', '', '', '', '1607455439', 'ok kan', 'yesss', '5c0be0c9a50724dbd7b2aa39a188dd97', 'kghjsdghasdghjfdfahj', '1517', 'Outpatient'),
-(9, 'ghie kurt pazz', 'vigan city', '', '23', 'Male', '09556378057', '', '', '', '', '', '', '', '', '1607875286', 'negative', 'apor', '36f3b826b142a57e65e2a344ae88d8a1', 'kghjsdghasdghjfdfahj', '7977', 'Inpatient'),
-(10, 'marlon villena', 'mabilbila sur santa, ilocos sur', '23 - 11 - 1998', '23', 'Male', '09556378057', '', '', '', '', '', '', '', '', '1609988346', 'none\r<br />', 'none', '23d156526742db2e9807277fe8282604', 'cf7bc17bcf0caa3dbb2d4618e7338b96', '4103', 'Inpatient'),
-(11, 'lheander alves', 'mabilbila sur santa, ilocos sur', '11 - 02 - 2007', '14', 'Male', '09104724213', '2020-12-28', '2020-12-31', 'mabilbila sur santa, ilocos sur', 'pinili ilocos norte', 'boyet', 'motor', 'vc-1234', 'Yes', '1610076936', 'n/a', 'n/a', '823b08e1fee6fb6e96b6f2319a8bb1b5', 'cf7bc17bcf0caa3dbb2d4618e7338b96', '0', 'Inpatient');
+INSERT INTO `patients` (`id`, `name`, `street`, `municipality`, `dateOfBirth`, `age`, `gender`, `phone`, `traveled`, `entered`, `origin`, `destination`, `dname`, `vtype`, `plate`, `antigen`, `cTime`, `diagnosis`, `prescription`, `token`, `doctor`, `number`, `pcondition`) VALUES
+(5, 'charlene april alves', 'quezon santa ilocos sur', '', '', '23', 'Female', '9063430174', '', '', '', '', '', '', '', '', '1606477399', 'negative', 'negative', '0639125096a1773b4b755df7848cc56f', 'kghjsdghasdghjfdfahj', '1517', 'Inpatient'),
+(7, 'julius ceasar cuaresma', 'vigan', '', '', '21', 'Male', '09361226566', '', '', '', '', '', '', '', '', '1606795126', 'negative', 'travel history', 'd7fcc162c9e41624ae66225431027e50', 'kghjsdghasdghjfdfahj', '1577', 'Inpatient'),
+(9, 'ghie kurt pazz', 'vigan city', '', '', '23', 'Male', '09556378057', '', '', '', '', '', '', '', '', '1607875286', 'negative', 'apor', '36f3b826b142a57e65e2a344ae88d8a1', 'kghjsdghasdghjfdfahj', '7977', 'Inpatient'),
+(10, 'marlon villena', 'mabilbila sur santa, ilocos sur', '', '23 - 11 - 1998', '23', 'Male', '09556378057', '', '', '', '', '', '', '', '', '1609988346', 'none\r<br />', 'none', '23d156526742db2e9807277fe8282604', 'cf7bc17bcf0caa3dbb2d4618e7338b96', '4103', 'Inpatient'),
+(11, 'lheander alves', 'mabilbila sur santa, ilocos sur', '', '11 - 02 - 2007', '14', 'Male', '09104724213', '2020-12-28', '2020-12-31', 'mabilbila sur santa, ilocos sur', 'pinili ilocos norte', 'boyet', 'motor', 'vc-1234', 'Yes', '1610076936', 'n/a', 'n/a', '823b08e1fee6fb6e96b6f2319a8bb1b5', 'cf7bc17bcf0caa3dbb2d4618e7338b96', '0', 'Inpatient');
 
 -- --------------------------------------------------------
 
@@ -144,7 +145,7 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `token` varchar(255) NOT NULL,
-  `status` int(11) NOT NULL,
+  `type` text NOT NULL,
   `phone` varchar(255) NOT NULL,
   `profile` varchar(255) DEFAULT NULL,
   `gender` varchar(255) NOT NULL,
@@ -156,9 +157,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `firstName`, `secondName`, `email`, `password`, `token`, `status`, `phone`, `profile`, `gender`, `role`, `license`) VALUES
-(6, 'Charles Novy', 'Alves', 'cnalves@gmail.com', 'alves', 'asdfghjkl', 1, '09556378057', NULL, 'male', 'Surgeon', ''),
-(19, 'Donnell John', 'Bueno', 'dj@gmail.com', 'bueno', '8d1b177eb8c2b3757d5d1fe8ca0f3d37', 2, '09556378057', NULL, 'Male', 'pulis', '1123');
+INSERT INTO `users` (`id`, `firstName`, `secondName`, `email`, `password`, `token`, `type`, `phone`, `profile`, `gender`, `role`, `license`) VALUES
+(6, 'Charles Novy', 'Alves', 'cnalves@gmail.com', 'alves', 'asdfghjkl', 'admin', '09556378057', NULL, 'male', 'Admin', ''),
+(19, 'Donnell John', 'Bueno', 'dj@gmail.com', 'bueno', '8d1b177eb8c2b3757d5d1fe8ca0f3d37', 'doctor', '09556378057', NULL, 'Male', 'Doctor', '1123');
 
 --
 -- Indexes for dumped tables
@@ -202,7 +203,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `covid`
@@ -214,7 +215,7 @@ ALTER TABLE `covid`
 -- AUTO_INCREMENT for table `outbreaks`
 --
 ALTER TABLE `outbreaks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `patients`
