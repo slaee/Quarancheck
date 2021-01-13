@@ -1,25 +1,26 @@
 <?php 
 
 class Doctor{
-	public static function add($token, $firstName, $secondName, $email, $phone, $gender, $license, $role){
+	public static function add($token, $firstName, $secondName, $email, $type, $phone, $gender, $license, $role){
 		if($token == ""){
 			$token = md5(time().uniqid().unixtojd().$role.$email.$phone);
 			$password = "ilocossur"; 
+			// $type = "doctor";
 			
 			Db::insert(
 				"users", 
-				array("firstName", "secondName", "email", "password", "token", "type", "phone", "gender", "license", "role"), 
-				array($firstName, $secondName, $email, $password, $token, doctor, $phone, $gender, $license, $role)
+				array("firstName", "secondName", "email", "password", "token","type" ,"phone", "gender", "license", "role"), 
+				array($firstName, $secondName, $email, $password, $token, $type, $phone, $gender, $license, $role)
 			);
 			
 			Messages::success("Information has been added successfully");
 		} else {
-			self::edit($token, $firstName, $secondName, $email, $phone, $role);
+			self::edit($token, $firstName, $secondName, $email, $type,$phone,$role, $license, $gender);
 		}
 	}
 	
 	public static function load(){
-		$query = Db::fetch("users", "", "type = ? ", "doctor", "id ", "", "");
+		$query = Db::fetch("users", "", "type = ? ", "doctor", "", "", "");
 		if(Db::count($query)){
 			echo"<div class='form-holder'>
 					<table class='table table-bordered table-stripped'> 
@@ -92,9 +93,9 @@ class Doctor{
 	
 	public static function edit($token, $firstName, $secondName, $email, $phone, $role){
 		Db::update("users",
-		array("firstName", "secondName", "email", "phone", "role", ), 
+		array("firstName", "secondName", "email", "phone", "role"), 
 		array($firstName, $secondName, $email, $phone, $role), 
-		"type = ? AND token = ? ", array(doctor, $token)); 
+		"token = ? ", $token); 	
 		
 		Messages::success("You have edited this doctor <strong><a href='doctors-record.php'>View Edits</a></strong> ");
 	}

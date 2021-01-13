@@ -36,8 +36,8 @@ if(Patient::isPatientIn()){
 							
 							$form = new Form(2, "post");
 							$form->init();
-							$form->textBox("Contact Number", "phone", "text", "$phone", array("placeholder='Contact Number'") );
-							$form->textBox("Patient Number", "p-number", "text", "$number", array("placeholder='Patient Number'") );							
+							$form->textBox("","Contact Number", "phone", "text", "$phone", array("placeholder='Contact Number'") );
+							$form->textBox("","Patient Number", "p-number", "text", "$number", array("placeholder='Patient Number'") );							
 							$form->close("Access Your Data");
 						?>
 					</div> 

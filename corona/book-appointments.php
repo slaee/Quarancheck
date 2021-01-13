@@ -40,9 +40,9 @@ require_once "importance.php";
 							
 							$form = new Form(2, "post"); 
 							$form->init(); 
-							$form->textBox("Full Name", "p-name", "text", Patient::getP($patient, "name"), array("readonly") );
-							$form->textBox("Patient Number", "p-number", "number", Patient::getP($patient, "number"), array("readonly") );
-							$form->textBox("Phone", "p-phone", "number", Patient::getP($patient, "phone"), array("readonly"));
+							$form->textBox("","Full Name", "p-name", "text", Patient::getP($patient, "name"), array("readonly") );
+							$form->textBox("","Patient Number", "p-number", "number", Patient::getP($patient, "number"), array("readonly") );
+							$form->textBox("","Phone", "p-phone", "number", Patient::getP($patient, "phone"), array("readonly"));
 							$form->textarea("Message", "message", "" );
 							Doctor::getArray("a-doctor", 2);
 							$form->close("Send Message");

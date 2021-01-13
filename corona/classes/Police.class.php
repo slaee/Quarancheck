@@ -1,15 +1,15 @@
 <?php 
 
 class Police{
-	public static function add($token, $firstName, $secondName, $email, $phone, $gender, $role){
+	public static function add($token, $firstName, $secondName, $email, $type, $phone, $gender, $role){
 		if($token == ""){
 			$token = md5(time().uniqid().unixtojd().$role.$email.$phone);
 			$password = "hospital"; 
 			
 			Db::insert(
 				"users", 
-				array("firstName", "lastName", "email", "password", "token", "status", "phone", "gender", "role"), 
-				array($firstName, $secondName, $email, $password, $token, 2, $phone, $gender, $role)
+				array("firstName", "secondName", "email", "password", "token", "type", "phone", "gender", "role"), 
+				array($firstName, $secondName, $email, $password, $token, $type, $phone, $gender, $role)
 			);
 			
 			Messages::success("Information has been added successfully");
@@ -19,7 +19,7 @@ class Police{
 	}
 	
 	public static function load(){
-		$query = Db::fetch("users", "", "status = ? ", "2", "id DESC", "", "");
+		$query = Db::fetch("users", "", "type = ? ", "police", "id DESC", "", "");
 		if(Db::count($query)){
 			echo"<div class='form-holder'>
 					<table class='table table-bordered table-stripped'> 
@@ -36,7 +36,7 @@ class Police{
 			
 			while($data = Db::assoc($query)){
 				$firstName = $data['firstName']; 
-				$secondName = $data['lastName']; 
+				$secondName = $data['secondName']; 
 				$email = $data['email']; 
 				$phone = $data['phone']; 
 				$gender = $data['gender']; 
@@ -63,7 +63,7 @@ class Police{
 	
 	public static function getArray($name, $labelDistance){
 		$nextLabel = 12 - (int) $labelDistance; 
-		$query = Db::fetch("users", "", "status = ? ", "2", "id DESC", "", "");
+		$query = Db::fetch("users", "", "type = ? ", "police", "id DESC", "", "");
 		$array = array(); 
 		echo "<div class='form-group'>
 				<label class='col-md-".$labelDistance."' >Police</label>

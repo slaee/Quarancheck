@@ -19,10 +19,16 @@ if(!User::loggedIn()){
 			<div class='col-md-10'>
 				<div class='content-area'> 
 				<div class='content-header'> 
-					Patients <small>Patients' book / record</small>
+					Positive patients <small> book / record</small>
 				</div>
 				<div class='content-body'> 
-					<?php Patient::patientsBooks(); ?> 
+					<?php Patient::positivePatientsBooks(); ?> 
+				</div><!-- end of the content area --> 
+				<div class='content-header'> 
+					Negative patients <small>Patients' book / record</small>
+				</div>
+				<div class='content-body'> 
+					<?php Patient::negativePatientsBooks(); ?> 
 				</div><!-- end of the content area --> 
 				</div> 
 				

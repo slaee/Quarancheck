@@ -22,13 +22,13 @@ class Form{
 		return $divDistance;
 	}
 	
-	public function textBox($label, $name, $type,  $value,  $additinalAttr){/* $additinalAttr: it can take an empty string or an array */
+	public function textBox($id, $label, $name, $type,  $value,  $additinalAttr){/* $additinalAttr: it can take an empty string or an array */
 		if($additinalAttr == ""){
 			echo "
 			<div class='form-group'>
 				<label class='col-md-".$this->_labelDistance."'>$label</label>
 				<div class='col-md-".$this->getDivDistance()."'> 
-					<input type='$type' name='$name' value='$value' class='form-control' /> 
+					<input id='$id' type='$type' name='$name' value='$value' class='form-control' /> 
 				</div> 
 			</div> 
 		";

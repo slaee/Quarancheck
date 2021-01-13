@@ -15,29 +15,14 @@ class Patient{
 		}
 	
 		
-		$today = strftime(date("d-m-Y", time()));
-		$todayData = explode("-", $today);
-
-		$dataYear = explode("-", $dateOfBirth); 
-		$correctAge = (int) $todayData[2] -  $dataYear[0] ;
-		
-		$correctDateOfBirth = $dataYear[2]." - ".$dataYear[1]." - ".$dataYear[0];
-		
-		if($age != $correctAge){
-			Messages::error("You have indicated that patient was born $correctDateOfBirth, therefore they cannot be of $age YRS, the correct age should be $correctAge YRS. (".$todayData[2]." - ".$dataYear[0]." = $correctAge YRS). Please correct the details ");
-			return; 
-		}
-		
 		$time = time(); 
-		
 		$patientToken = md5(uniqid().time().unixtojd().$name.$age.$phone); 
-		
 		$diagnosis = str_replace("\n", "<br />", $diagnosis); 
 		$prescriptions = str_replace("\n", "<br />", $prescriptions);
 		
 		Db::insert("patients", 
 				array("name", "street", "municipality", "dateOfBirth", "age", "gender", "phone", "traveled", "entered", "origin", "destination", "dname", "vtype", "plate", "antigen", "cTime", "diagnosis", "prescription", "token", "doctor", "number", "pcondition"), 
-				array($name, $street_address,$municipality, $correctDateOfBirth, $correctAge, $gender, $phone,  $traveled, $entered, $origin, $destination, $dname, $vtype, $plate, $antigen,  $time, $diagnosis, $prescriptions, $patientToken, $doctor, $number, $condition )
+				array($name, $street_address,$municipality, $dateOfBirth, $age, $gender, $phone,  $traveled, $entered, $origin, $destination, $dname, $vtype, $plate, $antigen,  $time, $diagnosis, $prescriptions, $patientToken, $doctor, $number, $condition )
 		); 
 		
 		Config::redir("print.php?patient=$patientToken"); 
@@ -151,9 +136,9 @@ class Patient{
 	}
 	
 	
-	public static function patientsBooks(){
+	public static function positivePatientsBooks(){
 		
-		$query = Db::fetch("patients", "", "", "", "id DESC", "", ""); 
+		$query = Db::fetch("patients", "", "diagnosis=?", "Positive", "", "", ""); 
 		
 		if(Db::count($query)){
 			if(Db::count($query) == 1){
@@ -169,14 +154,15 @@ class Patient{
 		    echo "
 					<tr>
 						<td><strong>Name</strong></td>
-						<td><strong></strong></td>
+						<td><strong>Street Address</strong></td>
+						<td><strong>Municipality</strong></td>
 						<td><strong>Age</strong></td>
+						<td><strong>Date of Birth</strong></td>
 						<td><strong>Date Entered</strong></td>
 						<td><strong>Date traveled</strong></td>
 						<td><strong>Place Destination</strong></td>
 						<td><strong>Point of Origin</strong></td>
 						<td><strong>Result</strong></td>
-					
 						<td><strong>Print</strong></td>
 						
 					<tr>
@@ -211,6 +197,7 @@ class Patient{
 						<td>$street_address</td>
 						<td>$municipality</td>
 						<td>$age</td>
+						<td>$dateOfBirth</td>
 						<td>$entered</td>
 						<td>$traveled</td>
 						<td>$destination</td>
@@ -228,6 +215,83 @@ class Patient{
 		}
 	}
 	
+	public static function negativePatientsBooks(){
+		$query = Db::fetch("patients", "", "diagnosis=?", "Negative", "", "", ""); 
+		
+		if(Db::count($query)){
+			if(Db::count($query) == 1){
+				$countP = Db::count($query)." Record";
+			} else {
+				$countP = Db::count($query)." Records";
+			}
+			echo "<div class='badge-header'>$countP</div>"; 
+			
+			
+			echo "<div class='form-holder'><table class='table table-bordered'>";
+			
+		    echo "
+					<tr>
+						<td><strong>Name</strong></td>
+						<td><strong>Street Address</strong></td>
+						<td><strong>Municipality</strong></td>
+						<td><strong>Age</strong></td>
+						<td><strong>Date of Birth</strong></td>
+						<td><strong>Date Entered</strong></td>
+						<td><strong>Date traveled</strong></td>
+						<td><strong>Place Destination</strong></td>
+						<td><strong>Point of Origin</strong></td>
+						<td><strong>Result</strong></td>
+						<td><strong>Print</strong></td>
+						
+					<tr>
+			"; 
+			while($data = Db::assoc($query)){
+				$token = $data['token'];
+				$name = self::get($token, "name");
+				$street_address = self::get($token, "street"); 
+				$municipality = self::get($token,"municipality");
+				$dateOfBirth = self::get($token, "dateOfBirth"); 
+				$age = self::get($token, "age"); 
+				$phone = self::get($token, "phone"); 
+				$traveled =  self::get($token, "traveled");
+				$entered =  self::get($token, "entered");
+				$origin =  self::get($token, "origin");
+				$destination =  self::get($token, "destination");
+				$dname =  self::get($token, "dname");
+				$vtype =  self::get($token, "vtype");
+				$plate =  self::get($token, "plate");
+				$antigen =  self::get($token, "antigen");
+				$time = self::get($token, "cTime"); 
+				$diagnosis = self::get($token, "diagnosis"); 
+				$prescription = self::get($token, "prescription");
+				//*$date = strftime(date("d/m/Y", $time));*//
+				$doctor = self::get($token, "doctor");
+				$docName = User::get($doctor, "firstName")." ".User::get($doctor, "secondName");
+				
+				
+				echo "
+					<tr>
+						<td>$name</td>
+						<td>$street_address</td>
+						<td>$municipality</td>
+						<td>$age</td>
+						<td>$dateOfBirth</td>
+						<td>$entered</td>
+						<td>$traveled</td>
+						<td>$destination</td>
+						<td>$origin</td>
+						<td>$diagnosis</td>
+						<td><a href='print.php?patient=$token'>Print</a></td>
+						
+					<tr>
+			"; 
+			}
+			
+			echo "</table></div>";
+		} else {
+			Messages::info("There is no record in the moment"); 
+		}
+	}
 	
 	public static function checkPatient($number){
 		$query = Db::fetch("patients", "", "number =? ", $number, "", "", 1); 
@@ -286,7 +350,7 @@ class Patient{
 		
 		Table::start();
 		
-		$heading = array("Name","Street Address","Municipality", "Address", "Date of Birth", "Age", "Phone",  "Served On:", "Diagnosis", "Prescriptions", "Served By", "Print");
+		$heading = array("Name","Street Address","Municipality", "Date of Birth", "Age", "Phone",  "Served On:", "Diagnosis", "Prescriptions", "Served By", "Print");
 		$body = array();
 		Table::header($heading); 
 		

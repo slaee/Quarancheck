@@ -57,9 +57,9 @@ if(!User::loggedIn()){
 							
 							$form = new Form(2, "post"); 
 							$form->init(); 
-							$form->textBox("OutBreak", 'outbreak', 'text', "$outbreak", '');
-							$form->textarea("Comments", "comments", "$comments");
-							$form->textBox("Location", 'location', 'text', "$location", '');
+							$form->textBox("","OutBreak", 'outbreak', 'text', "$outbreak", '');
+							$form->textarea("","Comments", "comments", "$comments");
+							$form->textBox("","Location", 'location', 'text', "$location", '');
 							$form->textarea("Measures", "measures", "$measures");
 							if($token == ""){
 								$form->close("Add an outbreak");

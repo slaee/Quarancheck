@@ -30,7 +30,7 @@ if(!User::loggedIn()){
 							}
 							$form = new Form(2, "post");
 							$form->init();
-							$form->textBox("Patient Number", "p-number", "number",  "", ""); 
+							$form->textBox("","Patient Number", "p-number", "number",  "", ""); 
 							$form->close("Submit Number");
 							echo "
 								<div class='row'>

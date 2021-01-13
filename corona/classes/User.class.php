@@ -19,9 +19,6 @@ class User{
 			setcookie("emr-user", $token ,time()+(60*60*24*7*30),"/", "","",TRUE);
 
 			Config::redir("index.php"); 
-
-			
-
 			return; 
 		}
 		
@@ -35,8 +32,10 @@ class User{
 	}
 
 	public static function get($token, $field){
-		$query = Db::fetch("users", "$field", "token = ? ", $token ?? "null", "", "", "" );
+		$query = Db::fetch("users", "$field", "token = ? ", $token, "", "", "" );
 		$data = Db::num($query); 
+
+		$data[0] ??= '';
 		return $data[0]; 
 	}
 	
@@ -71,13 +70,13 @@ class User{
 		
 		$form = new Form(3, "post");
 		$form->init();
-		$form->textBox("First Name", "user-fn", "text",  $userFirstName, array("readonly='readonly'", "  style='font-size: 17px;' ") );
-		$form->textBox("Second Name", "user-sn", "text",  $userSecondName, array("readonly='readonly'", "  style='font-size: 17px;' ") );
-		$form->textBox("Email", "user-em", "text",  $userEmail, array("readonly='readonly'", "  style='font-size: 17px;' ") );
-		$form->textBox("Role", "user-role", "text",  $userRole, array("readonly='readonly'", "  style='font-size: 17px;' ") );
-		$form->textBox("Gender", "user-gender", "text",  $userGender, array("readonly='readonly'", "  style='font-size: 17px;' ") );
-		$form->textBox("Phone", "user-phone", "text",  $userPhone, array("readonly='readonly'", "  style='font-size: 17px;' ") );
-		$form->textBox("License Number", "user-license", "text",  $userLicense, array("readonly='readonly'", "  style='font-size: 17px;' ") );
+		$form->textBox("","First Name", "user-fn", "text",  $userFirstName, array("readonly='readonly'", "  style='font-size: 17px;' ") );
+		$form->textBox("","Second Name", "user-sn", "text",  $userSecondName, array("readonly='readonly'", "  style='font-size: 17px;' ") );
+		$form->textBox("","Email", "user-em", "text",  $userEmail, array("readonly='readonly'", "  style='font-size: 17px;' ") );
+		$form->textBox("","Role", "user-role", "text",  $userRole, array("readonly='readonly'", "  style='font-size: 17px;' ") );
+		$form->textBox("","Gender", "user-gender", "text",  $userGender, array("readonly='readonly'", "  style='font-size: 17px;' ") );
+		$form->textBox("","Phone", "user-phone", "text",  $userPhone, array("readonly='readonly'", "  style='font-size: 17px;' ") );
+		$form->textBox("","License Number", "user-license", "text",  $userLicense, array("readonly='readonly'", "  style='font-size: 17px;' ") );
 		$form->close("");
 		
 		echo "</div>";

@@ -19,18 +19,22 @@ if(!User::loggedIn()){
 			<div class='col-md-10'>
 				<div class='content-area'> 
 				<div class='content-header'> 
-					Doctors <small>Doctors' Profiles</small>
+					Doctors <small>Profiles</small>
 				</div>
 				<?php require_once "inc/alerts.inc.php";  ?> 
 				<div class='content-body'> 
 					<?php Doctor::load(); ?> 
 				</div><!-- end of the content area --> 
+				<div class='content-header'> 
+					Police <small>Profiles</small>
+				</div>
+				<?php require_once "inc/alerts.inc.php";  ?> 
+				<div class='content-body'> 
+					<?php Police::load(); ?> 
+				</div>
 				</div> 
 				
 			</div><!-- col-md-7 --> 
-
-			
-				
 		</div> 
 	</div> 
 </body>

@@ -1,7 +1,7 @@
 <?php 
 if(User::loggedIn()){
 
-	if($userStatus == 1){
+	if($userStatus == "admin"){
 	?> 
 	<div class='sidebar'>
 		<div class='sidebar-area'> 
