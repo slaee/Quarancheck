@@ -49,6 +49,7 @@ if (!User::loggedIn()) {
 								$diagnosis = "";
 								$prescription = "";
 								$condition = "";
+
 								$form = new Form(3, "post");
 								$form->init();
 								$form->textBox("", "Full Name", "p-name", "text",  "$name", "");
@@ -67,7 +68,7 @@ if (!User::loggedIn()) {
 								$form->select("Undergo with Antigen or Swab test", "antigen", "$antigen", array("Yes", "No"));
 								$form->select("Diagnosis", "p-diagnosis", "$diagnosis", array("Positive", "Negative"));
 								$form->textarea("Prescription", "p-prescription", "$prescription", array("Positive", "Negative"));
-								$form->textBox("", "Gender", "gender", "text", "$gender", array("disabled"));
+								$form->textBox("","Gender", "gender", "text","$gender", array("readonly"));
 								$form->select("Condition", "condition", "$condition", array("Inpatient", "Outpatient"));
 								$form->close("Submit and Print");
 							} else {
@@ -91,6 +92,7 @@ if (!User::loggedIn()) {
 								$diagnosis = "";
 								$prescription = "";
 								$condition = "";
+
 								$form = new Form(3, "post");
 								$form->init();
 								$form->textBox("", "Full Name", "p-name", "text",  "$name", "");

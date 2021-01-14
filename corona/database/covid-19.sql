@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 13, 2021 at 09:18 AM
+-- Generation Time: Jan 14, 2021 at 01:14 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -42,9 +42,7 @@ CREATE TABLE `appointment` (
 --
 
 INSERT INTO `appointment` (`id`, `name`, `fromm`, `phone`, `message`, `too`, `cTime`) VALUES
-(4, 'charlene april alves', '1517', '9063430174', 'huyyy', 'kghjsdghasdghjfdfahj', '1606479210'),
-(5, 'charlene april alves', '1517', '9063430174', 'Hi', '8d1b177eb8c2b3757d5d1fe8ca0f3d37', '1610450882'),
-(6, 'charlene april alves', '1517', '9063430174', 'you okay?', '8d1b177eb8c2b3757d5d1fe8ca0f3d37', '1610451008');
+(13, 'Doctor', 'a43d2e0bee0a5dd5e8cc16f7e3e16423', '0725895256', 'Swab ka bukas', '8739', '1610619446');
 
 -- --------------------------------------------------------
 
@@ -125,14 +123,16 @@ CREATE TABLE `patients` (
 --
 
 INSERT INTO `patients` (`id`, `name`, `street`, `municipality`, `dateOfBirth`, `age`, `gender`, `phone`, `traveled`, `entered`, `origin`, `destination`, `dname`, `vtype`, `plate`, `antigen`, `cTime`, `diagnosis`, `prescription`, `token`, `doctor`, `number`, `pcondition`) VALUES
-(5, 'charlene april alves', 'quezon santa ilocos sur', '', '', '23', 'Female', '9063430174', '', '', '', '', '', '', '', '', '1606477399', 'negative', 'negative', '0639125096a1773b4b755df7848cc56f', 'kghjsdghasdghjfdfahj', '1517', 'Inpatient'),
-(7, 'julius ceasar cuaresma', 'vigan', '', '', '21', 'Male', '09361226566', '', '', '', '', '', '', '', '', '1606795126', 'negative', 'travel history', 'd7fcc162c9e41624ae66225431027e50', 'kghjsdghasdghjfdfahj', '1577', 'Inpatient'),
-(9, 'ghie kurt pazz', 'vigan city', '', '', '23', 'Male', '09556378057', '', '', '', '', '', '', '', '', '1607875286', 'negative', 'apor', '36f3b826b142a57e65e2a344ae88d8a1', 'kghjsdghasdghjfdfahj', '7977', 'Inpatient'),
-(11, 'lheander alves', 'mabilbila sur santa, ilocos sur', '', '11 - 02 - 2007', '14', 'Male', '09104724213', '2020-12-28', '2020-12-31', 'mabilbila sur santa, ilocos sur', 'pinili ilocos norte', 'boyet', 'motor', 'vc-1234', 'Yes', '1610076936', 'n/a', 'n/a', '823b08e1fee6fb6e96b6f2319a8bb1b5', 'cf7bc17bcf0caa3dbb2d4618e7338b96', '0', 'Inpatient'),
-(12, 'Sample', 'Street chu', 'Manila', '01 - 01 - 2000', '21', 'Male', '09123456789', '2021-01-23', '2021-01-11', 'n/a', 'n/a', 'Tester', 'Motor', 'AE1245', 'Yes', '1610508151', 'Negative', 'Noasdfthing', '218a6556bdc6baef7d9fd065bc74c84b', 'asdfghjkl', '1851', 'Inpatient'),
-(13, 'Sample Test', 'Street test', 'Manila', '21 - 02 - 2000', '21', 'Male', '09123456789', '2021-01-22', '2021-01-28', 'n/a', 'n/a', 'Tester', 'Car', 'BE2341', 'Yes', '1610508708', 'Positive', 'nothing', '265b8efd685ef791482f839783a2d000', 'asdfghjkl', '8295', 'Inpatient'),
-(14, 'baby', 'auto ', 'fill', '13 - 01 - 2011', '10', 'Male', '09123456789', '2021-01-08', '2021-01-28', 'n/a', 'n/a', 'Tester', 'Motor', 'BE2341', 'No', '1610514097', 'Positive', 'nothing', 'd14c902443253ab8a4dff202da0d065c', 'asdfghjkl', '7757', 'Inpatient'),
-(15, 'Ben Jamin', 'Auto', 'Fill', '2002-01-31', '18', 'Other', '09123456789', '2021-01-09', '2021-01-28', 'n/a', 'n/a', 'Tester', 'Motor', 'AE1245', 'No', '1610523982', 'Positive', 'Sample', '560400e7782291e45b825b342bbf2ec1', 'a43d2e0bee0a5dd5e8cc16f7e3e16423', '6894', 'Inpatient');
+(18, 'Sia jane', 'ilocos street', 'ilocos', '2009-03-21', '11', 'Female', '09123456789', '2021-01-29', '2021-02-06', 'n/a', 'n/a', 'Dopine', 'Motor', 'BE2341', 'Yes', '1610604307', 'Positive', 'Postive', '99087148c182c7eadf1ced3966d1f6fd', 'a43d2e0bee0a5dd5e8cc16f7e3e16423', '6734', 'Inpatient'),
+(19, 'Jhon Doe', 'tondo', 'manila', '1996-03-14', '24', 'Male', '09123456789', '2021-01-23', '2021-02-05', 'n/a', 'n/a', 'Tester', 'Motor', 'BE2341', 'Yes', '1610604547', 'Positive', 'Positive ako', '73c04d6e9757e3d0cc621ecb35c62629', 'a43d2e0bee0a5dd5e8cc16f7e3e16423', '8739', 'Inpatient'),
+(20, 'Jong V', 'san vilisca', 'ilocos', '1988-03-02', '32', 'Male', '09123456789', '2021-01-23', '2021-01-29', 'San Vilisca', 'Tondo Manila', 'Dopamine', 'Motor', 'ACE1344124', 'Yes', '1610615612', 'Positive', 'positive', '1a8d962659c34ff61bc3c35e7a7c89ee', 'a43d2e0bee0a5dd5e8cc16f7e3e16423', '7058', 'Inpatient'),
+(41, 'Sabe Jong', 'tondo', 'cagayan', '2007-02-06', '13', 'Male', '09123456789', '2021-01-02', '2021-01-29', 'San Vilisca', 'Ilocos', 'Dopine', 'Car', 'AE1245', 'Yes', '1610620857', 'Negative', 'Negative', '139f24a924b0504f4db9d451d506057d', 'a43d2e0bee0a5dd5e8cc16f7e3e16423', '5364', 'Inpatient'),
+(42, 'Sia jane', 'ilocos street', 'ilocos', '2009-03-21', '11', 'Male', '09123456789', '2021-01-29', '2021-02-06', 'n/a', 'n/a', 'Dopine', 'Motor', 'BE2341', 'Yes', '1610624653', 'Negative', 'tesasd', 'a1779a6ec322b2526b59dea84653517b', 'a43d2e0bee0a5dd5e8cc16f7e3e16423', '6734', 'Inpatient'),
+(43, 'Tester Name', 'test address', 'cagayan', '2008-11-13', '12', 'Male', '09123456789', '2021-01-09', '2021-01-21', 'Manila', 'Tondo Manila', 'Dopine', 'Car', 'BE2341', 'No', '1610625086', 'Negative', 'Nega', '94dd8a6eb3982523b2a9df542dfeb60e', 'a43d2e0bee0a5dd5e8cc16f7e3e16423', '9830', 'Outpatient'),
+(44, 'Jhon Doe', 'tondo', 'manila', '1996-03-14', '24', 'Male', '09123456789', '2021-01-23', '2021-02-05', 'n/a', 'n/a', 'Tester', 'Motor', 'BE2341', 'Yes', '1610625325', 'Negative', 'asdasdasd', '18753458293e76b0fcbbc33c32456dc5', 'a43d2e0bee0a5dd5e8cc16f7e3e16423', '8739', 'Inpatient'),
+(45, 'Jhon Doe', 'tondo', 'manila', '1996-03-14', '24', 'Male', '09123456789', '2021-01-23', '2021-02-05', 'n/a', 'n/a', 'Tester', 'Motor', 'BE2341', 'Yes', '1610625952', 'Negative', 'adsgagasdf', '0656ca051cff078654a0ed5af6f36d42', 'a43d2e0bee0a5dd5e8cc16f7e3e16423', '8739', 'Outpatient'),
+(46, 'Jhon Doe', 'tondo', 'manila', '1996-03-14', '24', 'Male', '09123456789', '2021-01-23', '2021-02-05', 'n/a', 'n/a', 'Tester', 'Motor', 'BE2341', 'Yes', '1610626207', 'Negative', 'Sample', 'a1419c4b0c11b19569eb4ba780437584', 'a43d2e0bee0a5dd5e8cc16f7e3e16423', '8739', 'Inpatient'),
+(47, 'Jhon Doe', 'tondo', 'manila', '1996-03-14', '24', 'Female', '09123456789', '2021-01-23', '2021-02-05', 'n/a', 'n/a', 'Tester', 'Motor', 'BE2341', 'Yes', '1610626338', 'Positive', 'Nothing', '1b114c4fdde19ca77b238e5698b90309', 'a43d2e0bee0a5dd5e8cc16f7e3e16423', '8739', 'Outpatient');
 
 -- --------------------------------------------------------
 
@@ -160,8 +160,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstName`, `secondName`, `email`, `password`, `token`, `type`, `phone`, `profile`, `gender`, `role`, `license`) VALUES
-(6, 'Charles Novy', 'Alves', 'cnalves@gmail.com', 'alves', 'asdfghjkl', 'admin', '09556378057', NULL, 'male', 'Admin', ''),
-(53, 'John', 'Doe', 'john@gmail.com', 'ilocossur', 'a43d2e0bee0a5dd5e8cc16f7e3e16423', 'doctor', '09123456789', NULL, 'Male', 'Surgeon', '2415124124');
+(6, 'Charles Novy', 'Alves', 'cnalves@gmail.com', '123123', 'asdfghjkl', 'admin', '09556378057', NULL, 'male', 'Admin', ''),
+(53, 'John', 'Doe', 'john@gmail.com', '123123', 'a43d2e0bee0a5dd5e8cc16f7e3e16423', 'doctor', '09123456789', NULL, 'Male', 'Surgeon', '2415124124'),
+(54, 'Police', 'Man', 'police@mail.com', 'hospital', '5720baeb08554e45e4b6719dd7267efa', 'police', '09123456789', NULL, 'Male', '12415155512', '');
 
 --
 -- Indexes for dumped tables
@@ -205,7 +206,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `covid`
@@ -223,13 +224,13 @@ ALTER TABLE `outbreaks`
 -- AUTO_INCREMENT for table `patients`
 --
 ALTER TABLE `patients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
