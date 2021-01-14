@@ -111,7 +111,8 @@ if (User::loggedIn()) {
 		</div>
 
 	<?php
-	} else if (Patient::isPatientIn()) {
+	} 
+}else if (Patient::isPatientIn()) {
 	?>
 
 		<div class='sidebar'>
@@ -144,5 +145,4 @@ if (User::loggedIn()) {
 		</div>
 
 <?php
-	}
 }

@@ -39,7 +39,7 @@ if (!User::loggedIn()) {
 			var chart = new CanvasJS.Chart("chartContainer", {
 				animationEnabled: true,
 				exportEnabled: true,
-				theme: "light1", // "light1", "light2", "dark1", "dark2"
+				theme: "light2", // "light1", "light2", "dark1", "dark2"
 				title: {
 					text: "Covid-19 cases by municipality"
 				},
@@ -48,9 +48,11 @@ if (!User::loggedIn()) {
 				},
 				data: [{
 					type: "column", //change type to bar, line, area, pie, etc
-					//indexLabel: "{y}", //Shows y value on all Data Points
-					indexLabelFontColor: "#5A5757",
-					indexLabelPlacement: "outside",
+					indexLabel: "{y}", //Shows y value on all Data Points
+					indexLabelFontColor: "white",
+					indexLabelPlacement: "inside",
+					indexLabelFontSize: "15",
+					yValueFormatString: "###,###,###,###. cases",
 					dataPoints: <?php echo json_encode(Outbreak::$dataPoints, JSON_NUMERIC_CHECK); ?>
 				}]
 			});
@@ -58,7 +60,7 @@ if (!User::loggedIn()) {
 
 		}
 	</script>
-	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	<script src="./js/canvasjs.min.js"></script>
 </body>
 
 </html>

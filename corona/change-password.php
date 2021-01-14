@@ -45,9 +45,9 @@ if(!User::loggedIn()){
 							
 							$form = new Form(2, "post"); 
 							$form->init();
-							$form->textBox("Old Password", "o-p", "password", "", "");
-							$form->textBox("New Password", "n-p", "password", "", ""); 
-							$form->textBox("Confirm Password", "c-p", "password", "", "");
+							$form->textBox("","Old Password", "o-p", "password", "", "");
+							$form->textBox("","New Password", "n-p", "password", "", ""); 
+							$form->textBox("","Confirm Password", "c-p", "password", "", "");
 							$form->close("Change Password"); 
 						?> 
 					</div> 

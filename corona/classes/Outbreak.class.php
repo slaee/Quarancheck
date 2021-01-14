@@ -52,7 +52,8 @@ class Outbreak
 
 		$x = 0;
 		foreach ($municipality as $municipal => $cases) {	
-			self::$dataPoints[] = array("x" => $x, "y" => $cases, "indexLabel" => ucfirst($municipal));
+			self::$dataPoints[] = array("y" => $cases, "label" =>  ucfirst($municipal));
+			// self::$dataPoints[] = array("x" => $x, "y" => $cases, "indexLabel" => ucfirst($municipal));
 			Table::body(array($cases, ucfirst($municipal)));
 			$x++;
 		}
