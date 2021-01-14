@@ -71,7 +71,7 @@ class Doctor{
 		$query = Db::fetch("users", "", "type = ? ", "doctor", "id DESC", "", "");
 		$array = array(); 
 		echo "<div class='form-group'>
-				<label class='col-md-".$labelDistance."' >Doctors</label>
+				<label class='col-md-".$labelDistance."' >To: </label>
 				<div class='col-md-".$nextLabel."'>
 				<select name='$name' class='form-control'>
 					<option value='' >--Select a Doctor--</option>
@@ -86,6 +86,17 @@ class Doctor{
 		}
 		echo "</select></div></div> ";
 	}
+
+	public static function getDoc($type, $field)
+	{
+		$query = Db::fetch("users", "$field", "type =?", $type, "", "", "");
+		if (Db::count($query)) {
+			$data = Db::num($query);
+			return $data[0];
+		}
+
+		Messages::error("Invalid patient token!");
+	}
 	
 	public static function delete($token){
 		Db::delete("users", "token = ? ", $token);
@@ -98,5 +109,13 @@ class Doctor{
 		"token = ? ", $token); 	
 		
 		Messages::success("You have edited this doctor <strong><a href='doctors-record.php'>View Edits</a></strong> ");
+	}
+
+	public static  function isDoctorIn()
+	{
+		if (isset($_SESSION['doctor'])) {
+			return true;
+		}
+		return;
 	}
 }

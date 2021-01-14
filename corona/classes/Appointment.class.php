@@ -2,7 +2,7 @@
 
 class Appointment{
 	public static function send($name, $number, $phone, $message, $doctor){
-		if(Patient::isPatientIn()){
+		if(Patient::isPatientIn() || User::loggedIn()){
 			$time = time(); 
 			Db::insert("appointment", 
 				array("name", "fromm", "phone", "message", "too", "cTime"), 
@@ -12,6 +12,72 @@ class Appointment{
 			return; 
 		} 
 		Messages::error("You must be logged in");
+	}
+
+	public static function sendMessageToPatient($name, $number, $phone, $message){
+		if(!User::loggedIn()){
+			Messages::error("You must be logged in to complete this action");
+			return; 
+		}
+		if($message == "" || $number == ""){
+			Messages::error("Please enter a message");
+			return; 
+		}
+		
+		$time = time(); 
+		$name = "Doctor";
+		$phone = "0725895256"; 
+		
+		Db::insert("appointment", 
+			array("name", "fromm", "phone", "message", "too", "cTime"), 
+			array($name, User::getToken(), $phone, $message, $number, time() )
+		);
+		Messages::success("Reply sent");
+	}
+
+	public static function reply($message, $number){
+		if(!User::loggedIn()){
+			Messages::error("You must be logged in to complete this action");
+			return; 
+		}
+		if($message == "" || $number == ""){
+			Messages::error("Please enter a message");
+			return; 
+		}
+		
+		$time = time(); 
+		$name = "Doctor";
+		$phone = "0725895256"; 
+		
+		Db::insert("appointment", 
+			array("name", "fromm", "phone", "message", "too", "cTime"), 
+			array($name, User::getToken(), $phone, $message, $number, time() )
+		);
+		Messages::success("Reply sent");
+		
+	}
+
+	public static function loadDoctorMessages(){
+		if(Patient::isPatientIn()){
+			$query = Db::fetch("appointment", "","too = ?", $_SESSION['patient'], "", "", "");
+			if(!Db::count($query)){
+				Messages::info("You currently have no Doctor's appointments");
+				return;
+			}
+			echo "<div class='form-holder'>";
+			Table::start(); 
+			$header = array("Doctor", "Message"); 
+			Table::header($header);
+			while($data = Db::assoc($query) ){
+				$docToken = $data['fromm']; 
+				$doctorName = User::get($docToken, "firstName")." ".User::get($docToken, "secondName");
+				Table::body(array($doctorName, $data['message']));
+			}
+			//Table::create($header, $body);
+			Table::close();
+			echo "</div>"; 
+			return; 
+		}
 	}
 	
 	public static function loadPatientSentAppointments(){
@@ -25,12 +91,12 @@ class Appointment{
 			
 			echo "<div class='form-holder'>";
 			Table::start(); 
-			$header = array("Doctor", "Message"); 
+			$header = array("Your Message", "To"); 
 			Table::header($header);
 			while($data = Db::assoc($query) ){
 				$docToken = $data['too']; 
 				$doctorName = User::get($docToken, "firstName")." ".User::get($docToken, "secondName");
-				Table::body(array($doctorName, $data['message']));
+				Table::body(array($data['message'], $doctorName));
 			}
 			//Table::create($header, $body);
 			Table::close();
@@ -69,7 +135,7 @@ class Appointment{
 	}
 	
 	public static function loadDoctorAppointMents(){
-		if(User::loggedIn()){
+		if(User::loggedIn() || Patient::isPatientIn()){
 			$query = Db::fetch("appointment", "", "too = ?", User::getToken(), "", "", "" );
 			if(!Db::count($query)){
 				Messages::info("You currently have no received or booked appointments");
@@ -95,7 +161,7 @@ class Appointment{
 	}
 	
 	public static function loadDoctorRepliedAppointMents(){
-		if(User::loggedIn()){
+		if(User::loggedIn() || Patient::isPatientIn()	){
 			$query = Db::fetch("appointment", "", "fromm = ?", User::getToken(), "", "", "" );
 			if(!Db::count($query)){
 				Messages::info("You've not replied to nay appointment in the moment");
@@ -104,13 +170,14 @@ class Appointment{
 			
 			echo "<div class='form-holder'>";
 			Table::start(); 
-			$header = array("Patient Number", "Name",  "Message"); 
+			$header = array("Your Message","To", "Patient Number"); 
 			$body = array();
 			Table::header($header); 
 			while($data = Db::assoc($query) ){
-				$number = $data['too']; 
+				$number = $data['too'];
+				$patient_name = Patient::getNumber($number, "name");
 				//array_push($body, );
-				Table::body(array($number, $data['name'], $data['message']));
+				Table::body(array($data['message'], $patient_name, $number));
 			}
 			//Table::create($header, $body);
 			Table::close();
@@ -119,29 +186,4 @@ class Appointment{
 		} 
 		Messages::error("You must be logged in");
 	}
-	
-	public static function reply($message, $number){
-		if(!User::loggedIn()){
-			Messages::error("You must be logged in to complete this action");
-			return; 
-		}
-		if($message == "" || $number == ""){
-			Messages::error("Please enter a message");
-			return; 
-		}
-		
-		$time = time(); 
-		$name = "Doctor";
-		$phone = "0725895256"; 
-		
-		Db::insert("appointment", 
-			array("name", "fromm", "phone", "message", "too", "cTime"), 
-			array($name, User::getToken(), $phone, $message, $number, time() )
-		);
-		Messages::success("Reply sent");
-		
-	}
-	
-	
-	
 }

@@ -22,7 +22,7 @@ if(!Patient::isPatientIn()){
 					Sent Messages <small>View your sent messages</small>
 				</div>
 				<div class='content-body'> 
-					<?php Appointment::loadPatientRepliedAppointment();  ?>
+					<?php Appointment::loadPatientSentAppointments();  ?>
 				</div><!-- end of the content area --> 
 				</div> 
 				

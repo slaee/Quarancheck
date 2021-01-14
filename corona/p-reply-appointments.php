@@ -19,10 +19,10 @@ if(!Patient::isPatientIn()){
 			<div class='col-md-7'>
 				<div class='content-area'> 
 				<div class='content-header'> 
-					Sent Appointments <small>View your sent appointments</small>
+					Doctor's <small>message</small>
 				</div>
 				<div class='content-body'> 
-					<?php Appointment::loadPatientRepliedAppointment();  ?>
+					<?php Appointment::loadDoctorMessages();  ?>
 				</div><!-- end of the content area --> 
 				</div> 
 				

@@ -1,10 +1,10 @@
 <?php 
 require_once "importance.php"; 
 
-if(){
-	header("Location:index.php");
-	return; 
-}
+// if(){
+// 	header("Location:index.php");
+// 	return; 
+// }
 ?> 
 
 <html>
@@ -29,15 +29,15 @@ if(){
 							$number = "";
 							
 							if(isset($_POST['email'])){
-								$userEmail = $_POST['email']; 
+								$userEmail = $_POST['p-email']; 
 								$number = $_POST['p-number'];
 								Patient::authorize($email, $number);
 							}
 							
 							$form = new Form(2, "post");
 							$form->init();
-							$form->textBox("email", "$userEmail", array("placeholder='Email'") );
-							$form->textBox("phone number", "p-number", "number", "$phone", array("placeholder='Contact Number'") );							
+							$form->textBox("","email","p-email", "email", "$userEmail", array("placeholder='Email'") );
+							$form->textBox("","phone number", "p-number", "number", "$phone", array("placeholder='Contact Number'") );							
 							$form->close("Access Your Data");
 						?>
 					</div> 

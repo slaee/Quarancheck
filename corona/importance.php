@@ -30,7 +30,7 @@ if(User::loggedIn()){
 	$userRole = User::get($token, "role");
 	$userLicense = User::get($token, "license");
 	
-	if($userStatus == 1){
+	if($userStatus == "admin"){
 		$userRole = "Admin";
 	} else {
 		$userRole = $userRole;

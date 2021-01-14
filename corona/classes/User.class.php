@@ -17,7 +17,9 @@ class User{
 
 			// this cookie will be saved on the database for security purposes
 			setcookie("emr-user", $token ,time()+(60*60*24*7*30),"/", "","",TRUE);
-
+			@session_start();
+			$_SESSION['doctor'] = 'doctor';
+			
 			Config::redir("index.php"); 
 			return; 
 		}
