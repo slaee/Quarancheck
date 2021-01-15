@@ -302,7 +302,7 @@ class Patient
 
 	public static function patientList($name, $labelDistance){
 		$nextLabel = 12 - (int) $labelDistance; 
-		$query = Db::fetch("patients", "", "diagnosis =?", "Positive", "", "", "");
+		$query = Db::fetch("patients", "", "", "", "id DESC", "", "");
 		echo "<div class='form-group'>
 				<label class='col-md-".$labelDistance."' >To</label>
 				<div class='col-md-".$nextLabel."'>
