@@ -31,10 +31,14 @@ foreach ($scheduler_groups as $group) {
 	foreach ($scheduler_resources as $resource) {
 		$r = new Resource();
 		$r->id = $resource['id'];
+		$r->token = $resource['token'];
+		$r->number = $resource['number'];
 		$r->name = $resource['name'];
 		$g->children[] = $r;
 	}
 }
+
+
 
 header('Content-Type: application/json');
 echo json_encode($groups);

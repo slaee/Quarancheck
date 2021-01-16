@@ -58,6 +58,7 @@ require_once "importance.php";
                 url: "backend_move.php",
                 data: {
                     id: args.e.id(),
+                    name: args.name.toString(),
                     newStart: args.newStart.toString(),
                     newEnd: args.newEnd.toString(),
                     newResource: args.newResource,
@@ -99,6 +100,14 @@ require_once "importance.php";
             var form = [{
                     name: "Text",
                     id: "text"
+                },
+                {
+                    name: "Patient Token",
+                    id: "token",
+                },
+                {
+                    name: "Patient Number",
+                    id: "number",
                 },
                 {
                     name: "Start",
@@ -149,6 +158,14 @@ require_once "importance.php";
             var form = [{
                     name: "Text",
                     id: "text"
+                },
+                {
+                    name: "Patient Token",
+                    id: "token",
+                },
+                {
+                    name: "Patient Number",
+                    id: "number",
                 },
                 {
                     name: "Start",

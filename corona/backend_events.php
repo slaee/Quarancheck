@@ -17,9 +17,11 @@ foreach ($result as $row) {
 	$e->id = $row['id'];
 	$e->text = $row['name'];
 	$e->start = $row['start'];
+	$e->token = $row['token'];
+	$e->number = $row['number'];
 	$e->end = $row['end'];
 	$e->resource = $row['resource_id'];
-	$e->bubbleHtml = "Event details: <br/>" . $e->text;
+	$e->bubbleHtml = "Event details:  " . $e->text . "<br>". "Id Number:  " . $e->number;
 	$events[] = $e;
 }
 

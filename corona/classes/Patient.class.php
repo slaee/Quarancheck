@@ -300,7 +300,7 @@ class Patient
 		$nextLabel = 12 - (int) $labelDistance; 
 		$query = Db::fetch("patients", "", "", "", "id DESC", "", "");
 		echo "<div class='form-group'>
-				<label class='col-md-".$labelDistance."' >To</label>
+				<label class='col-md-".$labelDistance."' >Select Patient</label>
 				<div class='col-md-".$nextLabel."'>
 				<select name='$name' class='form-control'>
 					<option value='' >--Select a Patient--</option>
@@ -386,6 +386,8 @@ class Patient
 		$body = array();
 		Table::header($heading);
 
+		echo get_current_user();
+		
 		while ($data = Db::assoc($query)) {
 			$token = $data['token'];
 			$name = self::get($token, "name");

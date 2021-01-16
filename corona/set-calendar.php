@@ -18,7 +18,7 @@ require_once "importance.php";
             <div class='col-md-10'>
                 <div class='content-area'>
                     <div class='content-header' style="background-color: white">
-                        Calendar<small></small>
+                        Swab Test Book appointments<small></small>
                     </div>
                     <div class="main">
                         <div id="dp"></div>
@@ -36,7 +36,6 @@ require_once "importance.php";
         dp.scale = "Day";
         dp.startDate = new DayPilot.Date().firstDayOfMonth();
         dp.days = dp.startDate.daysInMonth();
-
         dp.timeHeaders = [{
                 groupBy: "Month",
                 format: "MMMM yyyy"
@@ -47,7 +46,7 @@ require_once "importance.php";
             },
         ];
 
-        dp.cellWidthSpec = "Auto";
+        dp.cellWidthSpec = 50;
         dp.eventHeight = 40;
 
         dp.eventDeleteHandling = "Update";
@@ -58,6 +57,8 @@ require_once "importance.php";
                 url: "backend_move.php",
                 data: {
                     id: args.e.id(),
+                    token: args.token,
+                    number: args.number,
                     newStart: args.newStart.toString(),
                     newEnd: args.newEnd.toString(),
                     newResource: args.newResource,
@@ -74,6 +75,8 @@ require_once "importance.php";
                 url: "backend_resize.php",
                 data: {
                     id: args.e.id(),
+                    token: args.token,
+                    number: args.number,
                     newStart: args.newStart.toString(),
                     newEnd: args.newEnd.toString(),
                 },
@@ -101,6 +104,14 @@ require_once "importance.php";
                     id: "text"
                 },
                 {
+                    name: "Patient Token",
+                    id: "token",
+                },
+                {
+                    name: "Patient Number",
+                    id: "number",
+                },
+                {
                     name: "Start",
                     id: "start",
                     dateFormat: "M/d/yyyy h:mm:ss tt",
@@ -121,6 +132,8 @@ require_once "importance.php";
                 start: args.start,
                 end: args.end,
                 resource: args.resource,
+                number: args.number,
+                token: args.token,
                 text: "New event",
             };
 
@@ -149,6 +162,14 @@ require_once "importance.php";
             var form = [{
                     name: "Text",
                     id: "text"
+                },
+                {
+                    name: "Patient Token",
+                    id: "token",
+                },
+                {
+                    name: "Patient Number",
+                    id: "number",
                 },
                 {
                     name: "Start",

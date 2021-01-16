@@ -24,13 +24,14 @@ if(!User::loggedIn()){
 				<div class='content-body'> 
 					<div class='form-holder'> <br /> 
 						<?php 
-							if(isset($_POST['p-number'])){
-								$number = $_POST['p-number']; 
+							if(isset($_POST['a-patient'])){
+								$number = $_POST['a-patient']; 
 								Patient::checkPatient($number); 
 							}
 							$form = new Form(2, "post");
 							$form->init();
-							$form->textBox("","Patient Number", "p-number", "number",  "", ""); 
+							// $form->textBox("","Patient Number", "a-patient", "number",  "", "");
+							Patient::patientList("a-patient", 2);
 							$form->close("Submit Number");
 							echo "
 								<div class='row'>

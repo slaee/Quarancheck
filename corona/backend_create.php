@@ -1,15 +1,20 @@
 <?php
 require_once '_db.php';
+require_once 'importance.php';
 
 $json = file_get_contents('php://input');
 $params = json_decode($json);
 
-$stmt = $db->prepare("INSERT INTO events (name,token, start, end, too, resource_id) VALUES (:name, :token, :start, :end,:too, :resource)");
+$query = Db::fetch("resources", "", "id = ?", $params->resource, "", "", "");
+
+$data = Db::assoc($query);
+
+$stmt = $db->prepare("INSERT INTO events (name, token, number, start, end, resource_id) VALUES (:name, :token, :number, :start, :end, :resource)");
 $stmt->bindParam(':start', $params->start);
 $stmt->bindParam(':end', $params->end);
 $stmt->bindParam(':name', $params->text);
-$stmt->bindParam(':token', $params->text);
-$stmt->bindParam(':too', $params->text);
+$stmt->bindParam(':token', $data['token']);
+$stmt->bindParam(':number', $data['number']);
 $stmt->bindParam(':resource', $params->resource);
 $stmt->execute();
 

@@ -9,10 +9,7 @@
 
 require_once 'importance.php';
 
-
-$token = $_SESSION['patient'];
-$query = Db::fetch("events", "", "resource_id = ?", Patient::get($token, "id"), "", "", "");
-
+$query = Db::fetch("events", "", "number = ?", $_SESSION['patient'], "", "", "");
 
 class Event
 {
@@ -24,7 +21,8 @@ $events = array();
 while($row = Db::assoc($query)) {
 	$e = new Event();
 	$e->id = $row['id'];
-	$e->text = $row['name'];
+    $e->text = $row['name'];
+    $e->number = $row['number'];
 	$e->start = $row['start'];
 	$e->end = $row['end'];
 	$e->resource = $row['resource_id'];
