@@ -86,7 +86,6 @@ class Patient
 		$doctor = self::get($token, "doctor");
 		$number = self::get($token, "number");
 
-
 		echo "
 			<div class='badge-header print-p-data' style='cursor: pointer;'>Print</div>
 			<div class='print-data'>
@@ -139,7 +138,6 @@ class Patient
 		";
 	}
 
-
 	public static function positivePatientsBooks()
 	{
 
@@ -188,14 +186,13 @@ class Patient
 				$dname =  self::get($token, "dname");
 				$vtype =  self::get($token, "vtype");
 				$plate =  self::get($token, "plate");
+				$number = self::get($token, "number");
 				$antigen =  self::get($token, "antigen");
 				$time = self::get($token, "cTime");
 				$diagnosis = self::get($token, "diagnosis");
 				$prescription = self::get($token, "prescription");
-				//*$date = strftime(date("d/m/Y", $time));*//
 				$doctor = self::get($token, "doctor");
 				$docName = User::get($doctor, "firstName") . " " . User::get($doctor, "secondName");
-
 
 				echo "
 					<tr>
@@ -274,7 +271,6 @@ class Patient
 				//*$date = strftime(date("d/m/Y", $time));*//
 				$doctor = self::get($token, "doctor");
 				$docName = User::get($doctor, "firstName") . " " . User::get($doctor, "secondName");
-
 
 				echo "
 					<tr>

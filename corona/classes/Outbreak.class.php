@@ -5,23 +5,23 @@ class Outbreak
 	// this is if there is any outbreak
 	public static $dataPoints;
 
-	public static function add($token, $outbreakDisease, $comments, $location, $measures)
-	{
-		if ($token == "") {
-			$time = time();
-			$token = md5(uniqid() . time() . unixtojd());
-			Db::insert(
-				"outbreaks",
-				array("outBreak", "comments", "location", "cTime", "measures", "token"),
-				array($outbreakDisease, $comments, $location, $time,  $measures, $token)
-			);
+	// public static function add($token, $outbreakDisease, $comments, $location, $measures)
+	// {
+	// 	if ($token == "") {
+	// 		$time = time();
+	// 		$token = md5(uniqid() . time() . unixtojd());
+	// 		Db::insert(
+	// 			"outbreaks",
+	// 			array("outBreak", "comments", "location", "cTime", "measures", "token"),
+	// 			array($outbreakDisease, $comments, $location, $time,  $measures, $token)
+	// 		);
 
-			Messages::success("Outbreak has been added doctors will be able to see it and take necessary measures");
-		} else {
-			self::edit($token, $outbreakDisease, $comments, $location, $measures);
-			Messages::success("Outbreak has been edited. <strong><a href='outbreaks.php'>View edited record</a></strong>");
-		}
-	}
+	// 		Messages::success("Outbreak has been added doctors will be able to see it and take necessary measures");
+	// 	} else {
+	// 		self::edit($token, $outbreakDisease, $comments, $location, $measures);
+	// 		Messages::success("Outbreak has been edited. <strong><a href='outbreaks.php'>View edited record</a></strong>");
+	// 	}
+	// }
 
 	public static function load()
 	{
@@ -49,7 +49,7 @@ class Outbreak
 		}
 
 		$municipality = array_count_values($arr);
-
+		
 		$x = 0;
 		foreach ($municipality as $municipal => $cases) {	
 			self::$dataPoints[] = array("y" => $cases, "label" =>  ucfirst($municipal));

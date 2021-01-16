@@ -37,3 +37,20 @@ if(User::loggedIn()){
 	}
 }
 
+$query = Db::fetch("patients", "name", "", "", "", "", "");
+
+if (Db::count($query)) {
+    while($data = Db::assoc($query)){
+		$token = $data['token'];
+		$id = Patient::get($token, "id");
+        $name = Patient::get($token, "name");
+        $number = Patient::get($token, "number");
+        $diagnosis = Patient::get($token, "diagnosis");
+
+        if($diagnosis == "Positive"){
+            Set::reAdd($id, $token, $name, $number, 1);
+        } else {
+            Set::reAdd($id, $token, $name, $number, 2);
+        }
+    }
+}

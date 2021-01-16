@@ -9,3 +9,4 @@
 <script src="js/system.js"></script>
 <script src='js/jQuery.print.js' ></script>
 <script defer src="./js/autofill.js"></script>
+<script src="./js/daypilot-all.min.js"></script>

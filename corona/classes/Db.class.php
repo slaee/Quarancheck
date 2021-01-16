@@ -28,7 +28,7 @@ class Db{
 	public static function insert($table, array $columns, array $colValues ){
 		$con = self::connect(); 
 		try{
-			$test = "INSERT INTO $table("; 
+			$test = "INSERT IGNORE INTO $table("; 
 				foreach ($columns as $key => $value) {
 					
 					if($key == (count($columns) - 1)){
